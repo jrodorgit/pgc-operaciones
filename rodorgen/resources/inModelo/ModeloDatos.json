@@ -1,0 +1,54 @@
+{
+   "Entidades": [
+      {
+         "nombre": "ZZOperaciones",
+         "descripcion": "Entidad de operaciones",
+         "tipo": "OPERACIONES",
+         "author": "www.rodor.net",
+         "modulo": "net.rodor.pgc.test",
+         
+         "atributos":[
+         	{
+         		"nombreatr": "id",
+         		"descatr": "identificador unico del registro",
+         		"tipoatr": "NUMERICO",
+         		"formato": "10",
+         		"pk": "PK",
+         		"fk": "",
+         		"nulo":"NO"
+         	},
+         	
+         	{
+         		"nombreatr": "estado",
+         		"descatr": "Estado de la operacion",
+         		"tipoatr": "ALFANUMERICO",
+         		"formato": "20",
+         		"pk": "",
+         		"fk": "FK",
+         		"nulo":"NO"
+         	},
+         	
+         	{
+         		"nombreatr": "fechope",
+         		"descatr": "fecha de estado de la operacion",
+         		"tipoatr": "FECHA",
+         		"formato": "",
+         		"pk": "",
+         		"fk": "",
+         		"nulo":"NO"
+         	},
+         	
+         	{
+         		"nombreatr": "valoroperacion",
+         		"descatr": "valor en euros de la operacion",
+         		"tipoatr": "FLOAT",
+         		"formato": "10,2",
+         		"pk": "",
+         		"fk": "",
+         		"nulo":"SI"
+         	}
+         ]
+      }
+      
+   ]
+}
