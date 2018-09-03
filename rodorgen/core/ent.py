@@ -18,7 +18,7 @@ def getAtrsFK(entidad):
         if atr['fk'] == "FK":
             atrfk.append(atr['nombreatr'])
     
-    print(atrfk)
+    #print(atrfk)
     return atrfk
     
 def getAtrs(entidad):
@@ -32,5 +32,26 @@ def getAtrsForUpdate(entidad):
     at = [''.join( x['nombreatr'] ) for x in atrs]
     at.remove(getAtrPK(entidad))
     return ', '.join([x for x in [ (element + ' = ? ') for element in at]])
+    
+def getAtrDef(atributo):
+    """ devuelve la definicion de un atributo para su create """    
+    str = ''
+    str = atributo['nombreatr']
+    #formato del atributo
+    if atributo['tipoatr'] == 'NUMERICO':
+        str = str + ' NUMBER(' +  atributo['formato'] + ') '
+    elif atributo['tipoatr'] == 'FECHA':
+        str = str + ' TIMESTAMP '
+    elif atributo['tipoatr'] == 'FLOAT':
+        str = str + ' NUMBER(' +  atributo['formato'] + ') '
+    else :
+        str = str + ' VARCHAR2(' +  atributo['formato'] + ') '
+    
+    # si es no nulo add
+    if atributo['nulo'] == 'NO':
+        str = str + ' NOT NULL'
+        
+    return str
 
+    
 
