@@ -33,15 +33,6 @@ def leeLineaAjustaPatron(fichero,patron):
     read_file.close()
     return linea
 
-#lectura de entidades objetos['Entidades'][0]['nombre']
-#lectura de atributos objetos['Entidades'][0]['atributos']    
-#lectura de atributo 1 objetos['Entidades'][0]['atributos'][0] 
-# entidades = [x for x in  objetos['Entidades']]
-# shutil.copyfile(r'P:\mypython\rodorgen\resources\templates\ORACLE-DML-TEMPLATE.sql',r'P:\mypython\rodorgen\resources\outModelo\kk.sql')
-# s = open(r'P:\mypython\rodorgen\resources\outModelo\kk.sql').read()
-# s = s.replace(r'{nombre}', 'KKOperaciones')
-# f = open(r'P:\mypython\rodorgen\resources\outModelo\kk.sql', 'w')
-# f.write(s)
-
-# f.close()
-#with open(r'./rodorgen/resources/outModelo/kk.sql.sql',w) as f:   
+def leeFicheroAString(ficheroPath):
+    """ devuelve un fichero en una cadena """
+    return open(ficheroPath).read()
