@@ -35,6 +35,13 @@ def generaSQLDMLOracle(entidad):
     sql_delete_by_pk = sql_delete_by_pk.replace(r'{ATR_PK}', rodorgen.core.ent.getAtrPK(entity))
     fSQLDML.write(sql_delete_by_pk)
     
+    # generamos INSERT
+    sql_insert = rodorgen.files.utilfile.leeLineaAjustaPatron(rodorgen.main.TEMPLATES_DML_PATH,'INSERT')
+    sql_insert = sql_insert.replace(r'{ENTIDAD}', entity['nombre'])
+    sql_insert = sql_insert.replace(r'{ATRS}', rodorgen.core.ent.getAtrs(entity))
+    sql_insert = sql_insert.replace(r'{ATRS_VAL}', ', '.join(['?' for x in range(0,len(entity['atributos']) )]))
+    fSQLDML.write(sql_insert)
+     
     # generamos SELECT BY FK
     for fk in rodorgen.core.ent.getAtrsFK(entity):
         sql_select_by_fk = rodorgen.files.utilfile.leeLineaAjustaPatron(rodorgen.main.TEMPLATES_DML_PATH,'SELECT_BY_FK')
