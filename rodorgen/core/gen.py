@@ -73,11 +73,18 @@ def generaSQLDDLOracle(entidad):
     # LSITA DE ATRIBUTOS DE LA ENTIDAD
     atrsent = [a for a in entity['atributos']]
     atrdef = [rodorgen.core.ent.getAtrDef(a) for a in atrsent]
-    kk = ',\r\n\t'.join([p for p in atrdef])
-    print(kk)
-    sql_create = sql_create.replace(r'{ATRS}', kk) 
-    
+    sql_create = sql_create.replace(r'{ATRS}', ',\r\n\t'.join([p for p in atrdef])) 
     fSQLDDL.write(sql_create)
+    sql_coment = rodorgen.files.utilfile.leePropiedad(rodorgen.main.TEMPLATES_DML_PATH,'COMMENT_ATR')
+    sql_coment = sql_coment.replace(r'{ENTIDAD}', entity['nombre'])
+    for atr in entity['atributos']:
+        sql_coment_aux = sql_coment
+        fSQLDDL.write(sql_coment_aux.replace(r'{ATR}', atr['nombreatr'] ).replace(r'{ATR_DESC}', atr['descatr'] ) )
     
+    #DEFINICION DE PK
+    sql_pkdef = rodorgen.files.utilfile.leePropiedad(rodorgen.main.TEMPLATES_DML_PATH,'PK_DEFINITION')
+    sql_pkdef = sql_pkdef.replace(r'{ENTIDAD}', entity['nombre'])
+    sql_pkdef = sql_pkdef.replace(r'{ATR_PK}', rodorgen.core.ent.getAtrPK(entity))
+    fSQLDDL.write(sql_pkdef)
     
     fSQLDDL.close()
