@@ -33,6 +33,13 @@ def leeLineaAjustaPatron(fichero,patron):
     read_file.close()
     return linea
 
+def leePropiedad(fichero,propiedad,separador='='):
+    """ devuelve el valor de una propiedad en un fichero. Por defecto se utiliza el = como separador de nombre y valor de propiedad """
+    linea = leeLineaAjustaPatron(fichero,propiedad)
+    return linea[linea.find(separador)+1:].lstrip()
+    
 def leeFicheroAString(ficheroPath):
     """ devuelve un fichero en una cadena """
     return open(ficheroPath).read()
+    
+ 
