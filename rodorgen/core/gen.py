@@ -87,4 +87,14 @@ def generaSQLDDLOracle(entidad):
     sql_pkdef = sql_pkdef.replace(r'{ATR_PK}', rodorgen.core.ent.getAtrPK(entity))
     fSQLDDL.write(sql_pkdef)
     
+    # generamos definicion de FK
+    for fk in rodorgen.core.ent.getAtrsFKBis(entity):
+        sql_fk_def = rodorgen.files.utilfile.leePropiedad(rodorgen.main.TEMPLATES_DML_PATH,'FK_DEFINITION')
+        sql_fk_def = sql_fk_def.replace(r'{ENTIDAD}', entity['nombre'])
+        sql_fk_def = sql_fk_def.replace(r'{ATR_FK}', fk['nombreatr']) 
+        sql_fk_def = sql_fk_def.replace(r'{ENTIDAD_FK}', fk['fk'].split('.')[0]) 
+        sql_fk_def = sql_fk_def.replace(r'{ATR_FK_COLUM}', fk['fk'].split('.')[1]) 
+        fSQLDDL.write(sql_fk_def)
+        
+    
     fSQLDDL.close()
