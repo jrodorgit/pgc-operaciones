@@ -24,7 +24,7 @@
          		"tipoatr": "ALFANUMERICO",
          		"formato": "20",
          		"pk": "",
-         		"fk": "FK",
+         		"fk": "ZZEstadosOperacion.id",
          		"nulo":"NO"
          	},
          	
@@ -34,7 +34,7 @@
          		"tipoatr": "FECHA",
          		"formato": "",
          		"pk": "",
-         		"fk": "",
+         		"fk": "ZZFecha.kk",
          		"nulo":"NO"
          	},
          	
