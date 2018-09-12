@@ -15,10 +15,20 @@ def getAtrsFK(entidad):
     atrfk = []
     atrs = [a for a in entidad['atributos']]
     for atr in atrs:
-        if atr['fk'] == "FK":
+        if atr['fk'] != "":
             atrfk.append(atr['nombreatr'])
     
     #print(atrfk)
+    return atrfk
+
+def getAtrsFKBis(entidad):
+    """ devuelve lsitado de atributo que son FK """
+    atrfk = []
+    atrs = [a for a in entidad['atributos']]
+    for atr in atrs:
+        if atr['fk'] != "":
+            atrfk.append(atr)
+    
     return atrfk
     
 def getAtrs(entidad):
