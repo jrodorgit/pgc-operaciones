@@ -4,6 +4,7 @@ import rodorgen.files.utilfile
 import rodorgen.core.gen
 
 TEMPLATES_DML_PATH = r'./rodorgen/resources/templates/ORACLE-DML-TEMPLATE.properties'
+TEMPLATES_JAVA_BEAN_PATH = r'./rodorgen/resources/templates/Java-Bean-Template.java'
 TEMPLATES_DDL_PATH = r'./rodorgen/resources/templates/ORACLE-DDL-TEMPLATE.sql'
 OUT_MODEL_PATH = r'./rodorgen/resources/outModelo/'
 
@@ -23,3 +24,7 @@ def run():
     
     # generador del SQL DML para cada entidad.
     [rodorgen.core.gen.generaSQLDMLOracle(e) for e in entidades]
+    
+    # geneardor del java bean para cada entidad
+    [rodorgen.core.gen.generaJavaBean(e) for e in entidades]
+
