@@ -98,3 +98,33 @@ def generaSQLDDLOracle(entidad):
         
     
     fSQLDDL.close()
+ 
+ 
+def generaJavaBean(entidad):
+    """ genera codigo java del bean asociado a la entidad """
+    
+    entity = entidad['Entidades'][0]
+       
+    print('Nombre de la entidad a generar Java Bean:'+entity['nombre'])
+    print('Package: '+entity['modulo'])
+    
+    # obtenemos plantilla
+    java_bean_create = rodorgen.files.utilfile.leeFicheroAString(rodorgen.main.TEMPLATES_JAVA_BEAN_PATH)
+    
+    #apertura de fichero donde escribir JAVA BEAN de la entidad
+    fJavaBean = open(rodorgen.main.OUT_MODEL_PATH+entity['nombre']+'.java', 'w')
+    
+    #creamos bean
+    java_bean_create = java_bean_create.replace(r'{PACKAGE}', entity['modulo'])
+    java_bean_create = java_bean_create.replace(r'{ENTIDAD}', entity['nombre'])
+    
+    
+    # LISTA DE ATRIBUTOS DE LA ENTIDAD
+    atrsent = [a for a in entity['atributos']]
+    atrdef = [rodorgen.core.ent.getAtrJavaDef(a) for a in atrsent]
+    java_bean_create = java_bean_create.replace(r'{ATRS}', ';\r\n\t'.join([p for p in atrdef])) 
+    
+    
+    fJavaBean.write(java_bean_create)
+    fJavaBean.close()
+    
