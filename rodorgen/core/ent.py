@@ -63,5 +63,19 @@ def getAtrDef(atributo):
         
     return str
 
+def getAtrJavaDef(atributo):
+    """ devuelve la definicion de un atributo para su create en java bean """    
+    str = ''
     
+    #formato del atributo
+    if atributo['tipoatr'] == 'NUMERICO':
+        str = str + 'public int ' +  atributo['nombreatr']
+    elif atributo['tipoatr'] == 'FECHA':
+        str = str + 'public Timestamp ' +  atributo['nombreatr']
+    elif atributo['tipoatr'] == 'FLOAT':
+        str = str + 'public float ' +  atributo['nombreatr']
+    else :
+        str = str + 'public String ' +  atributo['nombreatr']
+        
+    return str   
 
