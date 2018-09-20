@@ -106,7 +106,7 @@ def generaJavaBean(entidad):
     entity = entidad['Entidades'][0]
        
     print('Nombre de la entidad a generar Java Bean:'+entity['nombre'])
-    print('Package: '+entity['modulo'])
+    
     
     # obtenemos plantilla
     java_bean_create = rodorgen.files.utilfile.leeFicheroAString(rodorgen.main.TEMPLATES_JAVA_BEAN_PATH)
@@ -122,9 +122,31 @@ def generaJavaBean(entidad):
     # LISTA DE ATRIBUTOS DE LA ENTIDAD
     atrsent = [a for a in entity['atributos']]
     atrdef = [rodorgen.core.ent.getAtrJavaDef(a) for a in atrsent]
-    java_bean_create = java_bean_create.replace(r'{ATRS}', ';\r\n\t'.join([p for p in atrdef])) 
+    java_bean_create = java_bean_create.replace(r'{ATRS}', ';\r\t'.join([p for p in atrdef])+';') 
     
     
     fJavaBean.write(java_bean_create)
     fJavaBean.close()
+    
+def generaJavaPSF(entidad):
+    """ genera codigo java del prepared statement factory  """
+    
+    entity = entidad['Entidades'][0]
+       
+    print('Nombre de la entidad a generar Java PSF:'+entity['nombre'])
+    
+    
+    # obtenemos plantilla
+    java_PSF_create = rodorgen.files.utilfile.leeFicheroAString(rodorgen.main.TEMPLATES_JAVA_PSF_PATH)
+    
+    #apertura de fichero donde escribir JAVA PSF de la entidad
+    fJavaPSF = open(rodorgen.main.OUT_MODEL_PATH+'PreparedStatementFactory.java', 'w')
+    
+    #creamos bean
+    java_PSF_create = java_PSF_create.replace(r'{PACKAGE}', entity['modulo'])
+    
+    fJavaPSF.write(java_PSF_create)
+    fJavaPSF.close()
+
+
     
